@@ -96,7 +96,6 @@ public class TrangChu extends JFrame {
 	private ChiTietHoaDon_DAO CTHD_dao;
 	private JFrame frame;
 	private Date ngayKH;
-	private static JLabel lblThongBao;
 
 	/**
 	 * Launch the application.
@@ -548,21 +547,9 @@ public class TrangChu extends JFrame {
 		btnDatHoiAn.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				DatTour dt = new DatTour();
-//				dt.setVisible(true);
-//				dt.getMaTourInTrangChu("MT006");
-//				setVisible(false);
-				
-				int hoi = JOptionPane.showConfirmDialog(null, "Khách Hàng đã có Thông Tin chưa ?","Chú ý",JOptionPane.YES_NO_OPTION);
-				if(hoi==JOptionPane.YES_OPTION) {
-					dt.getMaTourInTrangChu(txtmaTdanang_hoian.getText());
-					dt.setVisible(true);
-					setVisible(false);
-				}
-				else if(hoi==JOptionPane.NO_OPTION) {
-						QuanLyKhachHang qlkh = new QuanLyKhachHang();
-						qlkh.setVisible(true);
-						setVisible(false);
-					}
+				dt.setVisible(true);
+				dt.getMaTourInTrangChu("MT006");
+				setVisible(false);
 				
 			}
 		});
@@ -586,21 +573,9 @@ public class TrangChu extends JFrame {
 		btnDatHaGiang.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				DatTour dt = new DatTour();
-//				dt.setVisible(true);
-//				dt.getMaTourInTrangChu("MT002");
-//				setVisible(false);
-				
-				int hoi = JOptionPane.showConfirmDialog(null, "Khách Hàng đã có Thông Tin chưa ?","Chú ý",JOptionPane.YES_NO_OPTION);
-				if(hoi==JOptionPane.YES_OPTION) {
-					dt.getMaTourInTrangChu(textmahagiang.getText());
-					dt.setVisible(true);
-					setVisible(false);
-				}
-				else if(hoi==JOptionPane.NO_OPTION) {
-						QuanLyKhachHang qlkh = new QuanLyKhachHang();
-						qlkh.setVisible(true);
-						setVisible(false);
-					}
+				dt.setVisible(true);
+				dt.getMaTourInTrangChu("MT002");
+				setVisible(false);
 			}
 		});
 		btnDatHaGiang.setBounds(69, 126, 80, 21);
@@ -619,18 +594,9 @@ public class TrangChu extends JFrame {
 		btnDatLySon.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				DatTour dt = new DatTour();
-				int hoi = JOptionPane.showConfirmDialog(null, "Khách Hàng đã có Thông Tin chưa ?","Chú ý",JOptionPane.YES_NO_OPTION);
-				if(hoi==JOptionPane.YES_OPTION) {
-					dt.getMaTourInTrangChu(txtmaLyson.getText());
-					dt.setVisible(true);
-					setVisible(false);
-				}
-				else if(hoi==JOptionPane.NO_OPTION) {
-						QuanLyKhachHang qlkh = new QuanLyKhachHang();
-						qlkh.setVisible(true);
-						setVisible(false);
-					}
-				
+				dt.setVisible(true);
+				dt.getMaTourInTrangChu("MT003");
+				setVisible(false);
 			}
 		});
 		btnDatLySon.setBounds(65, 126, 80, 21);
@@ -773,46 +739,28 @@ public class TrangChu extends JFrame {
 		btnDatTour.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				DatTour dt = new DatTour();
-				int row =-1;
-					 row = table.getSelectedRow();
-					if(row==-1) {
-//						JOptionPane.showMessageDialog(null, "Chưa chọn Tour trong table !");
-						lblThongBao.setText("Chưa chọn Tour trong table !");
-						return;
-					}
-				int slt = Integer.parseInt(table.getValueAt(row, 6).toString());
-				if(slt >0) {
-					int hoi = JOptionPane.showConfirmDialog(null, "Khách Hàng đã có Thông Tin chưa ?","Chú ý",JOptionPane.YES_NO_OPTION);
-					if(hoi==JOptionPane.YES_OPTION) {
-						dt.getMaTourInTrangChu(table.getValueAt(row, 0).toString());
-						dt.setVisible(true);
-						setVisible(false);
-					}
-					else if(hoi==JOptionPane.NO_OPTION) {
-							QuanLyKhachHang qlkh = new QuanLyKhachHang();
-							qlkh.setVisible(true);
-							setVisible(false);
-						}
-				}
 				
-				else {
-//					JOptionPane.showMessageDialog(null, "Tour đã hết vé");
-					lblThongBao.setText("Tour đã hết vé");
+				try {
+					int row = table.getSelectedRow();
+					int slt = Integer.parseInt(table.getValueAt(row, 6).toString());
+					if(slt >0) {
+					dt.getMaTourInTrangChu(table.getValueAt(row, 0).toString());
+					dt.setVisible(true);
+					setVisible(false);
+					}
+					else {
+						JOptionPane.showMessageDialog(null, "Tour đã hết vé");
+					}
+				} catch (Exception e2) {
+					// TODO: handle exception
+					JOptionPane.showMessageDialog(null, "Chưa chọn Tour trong table !");
 				}
-				
 				
 			}
 		});
 		btnDatTour.setFont(new Font("Tahoma", Font.BOLD, 12));
 		btnDatTour.setBounds(475, 47, 89, 28);
 		panel_4.add(btnDatTour);
-		
-		 lblThongBao = new JLabel("");
-		lblThongBao.setHorizontalAlignment(SwingConstants.CENTER);
-		lblThongBao.setForeground(Color.RED);
-		lblThongBao.setFont(new Font("Segoe UI", Font.BOLD | Font.ITALIC, 12));
-		lblThongBao.setBounds(440, 105, 274, 14);
-		panel_4.add(lblThongBao);
 		
 		JPanel panel_5 = new JPanel();
 		panel_5.setBounds(10, 152, 724, 372);
